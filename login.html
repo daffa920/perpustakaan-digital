@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Pustaka Digital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page active" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-panel-left">
+      <div class="deco-lines"></div>
+      <div class="auth-brand">
+        <div class="logo-icon">📚</div>
+        <h1>Pustaka<br><em>Digital</em></h1>
+        <p>Ruang Baca Nusantara</p>
+      </div>
+      <blockquote class="auth-quote">
+        "Membaca adalah jendela dunia yang selalu terbuka, tak pernah menutup bagi jiwa yang haus akan ilmu."
+      </blockquote>
+    </div>
+    <div class="auth-panel-right">
+      <div class="auth-form-box">
+        <h2>Selamat datang</h2>
+        <div class="error-msg" id="login-error">Email atau kata sandi tidak sesuai.</div>
+        <div class="form-group">
+          <label>Alamat Email</label>
+          <input type="email" id="login-email" placeholder="nama@email.com">
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <input type="password" id="login-password" placeholder="••••••••">
+        </div>
+        <button class="btn-primary" onclick="login()">Masuk ke Perpustakaan</button>
+        <div class="divider">atau</div>
+        <p style="text-align:center;font-size:13px;color:var(--brown-light)">
+          Pertama kali? <a style="color:var(--gold);cursor:pointer;" href="registrasi.html">Masuk di sini</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

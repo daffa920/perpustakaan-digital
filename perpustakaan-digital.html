@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pustaka Digital — Ruang Baca</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="page-bg"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN LIBRARY PAGE
+═══════════════════════════════════════════════════ -->
+<div class="page active" id="page-main">
+  <div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">Pustaka <em>Digital</em></div>
+        <div class="logo-sub">Ruang Baca Nusantara</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-item active">
+          <span class="icon">🏠</span> Beranda
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">📖</span> Koleksi Buku
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">❤️</span> Favorit Saya
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">📋</span> Daftar Baca
+        </div>
+
+        <div class="nav-section-label">Kategori</div>
+
+        <div class="nav-item">
+          <span class="icon">🔬</span> Sains & Teknologi
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">🎭</span> Sastra & Fiksi
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">📜</span> Sejarah & Budaya
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">💡</span> Pengembangan Diri
+        </div>
+
+        <div class="nav-section-label">Kelola</div>
+
+        <div class="nav-item" onclick="showModal('modal-add')">
+          <span class="icon">➕</span> Tambah Buku
+        </div>
+
+        <div class="nav-item">
+          <span class="icon">⚙️</span> Pengaturan
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="window.location.href='logout.html'">
+          <span>🚪</span> Keluar
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-content">
+
+      <!-- Topbar -->
+      <div class="topbar">
+
+        <span class="topbar-title">
+          Perpustakaan Digital
+        </span>
+
+        <div class="topbar-search">
+          <span class="search-icon">🔍</span>
+
+          <input
+            type="text"
+            placeholder="Cari judul, penulis, kategori…"
+            oninput="filterBooks(this.value)"
+          >
+        </div>
+
+        <!-- Profile -->
+        <div class="profile-btn" onclick="toggleDropdown()">
+
+          <div class="avatar" id="topbar-avatar">
+            <img id="topbar-avatar-img" src="" alt="">
+            <span id="topbar-avatar-initial">U</span>
+          </div>
+
+          <span class="profile-name" id="topbar-name">
+            Pengguna
+          </span>
+
+          <span style="font-size:10px;color:var(--brown-light);">
+            ▾
+          </span>
+
+          <div class="profile-dropdown" id="profile-dropdown">
+
+            <div class="dropdown-user">
+              <div class="du-name" id="dropdown-name">
+                Pengguna
+              </div>
+
+              <div class="du-email" id="dropdown-email">
+                user@email.com
+              </div>
+            </div>
+
+            <div class="dropdown-item" onclick="showModal('modal-profile'); toggleDropdown()">
+              👤 Edit Profil & Foto
+            </div>
+
+            <div class="dropdown-item" onclick="showModal('modal-add'); toggleDropdown()">
+              📚 Tambah Buku
+            </div>
+
+            <div class="dropdown-item danger" onclick="window.location.href='logout.html'; toggleDropdown()">
+              🚪 Keluar
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="content-area">
+
+        <!-- Hero -->
+        <div class="hero-banner">
+
+          <div class="hero-text">
+
+            <div class="hero-tag">
+              ✦ Koleksi Terbaru
+            </div>
+
+            <h2>
+              Temukan Dunia Baru<br>
+              Dalam Setiap <em>Halaman</em>
+            </h2>
+
+            <p>
+              Jelajahi ribuan buku pilihan dari berbagai genre dan penulis terbaik,
+              tersedia untukmu kapan saja dan di mana saja.
+            </p>
+
+            <button class="hero-cta" onclick="showModal('modal-add')">
+              ✦ Tambah Buku Baru
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+
+          <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-num" id="stat-books">0</div>
+            <div class="stat-label">Total Buku</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">📂</div>
+            <div class="stat-num" id="stat-cat">4</div>
+            <div class="stat-label">Kategori</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-num" id="stat-users">1</div>
+            <div class="stat-label">Pembaca</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-num">4.8</div>
+            <div class="stat-label">Rating Rata-rata</div>
+          </div>
+
+        </div>
+
+        <!-- Books Section -->
+        <div class="section-header">
+
+          <h2>
+            Koleksi <span>Buku</span>
+          </h2>
+
+          <a class="see-all">
+            Lihat semua →
+          </a>
+
+        </div>
+
+        <div class="books-grid" id="books-grid">
+          <!-- populated by JS -->
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MODAL: ADD BOOK
+═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-add" onclick="closeModalOutside(event, 'modal-add')">
+
+  <div class="modal">
+
+    <h3>📚 Tambah Buku Baru</h3>
+
+    <p class="modal-sub">
+      Isi informasi buku yang ingin kamu tambahkan ke koleksi.
+    </p>
+
+    <div class="form-group">
+
+      <label>Foto Sampul Buku</label>
+
+      <div class="img-upload-area" onclick="triggerImgUpload('book-cover-input')">
+
+        <input
+          type="file"
+          id="book-cover-input"
+          accept="image/*"
+          onchange="previewCover(this)"
+          style="display:none"
+        >
+
+        <img class="img-preview" id="cover-preview">
+
+        <div class="upload-hint">
+
+          <div style="font-size:32px;margin-bottom:8px;">
+            🖼️
+          </div>
+
+          Klik untuk <span>unggah foto</span> sampul buku<br>
+
+          <small style="color:var(--parchment)">
+            JPG, PNG, WebP — maks 5MB
+          </small>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Judul Buku</label>
+      <input type="text" id="book-title" placeholder="Contoh: Laskar Pelangi">
+    </div>
+
+    <div class="form-group">
+      <label>Penulis</label>
+      <input type="text" id="book-author" placeholder="Contoh: Andrea Hirata">
+    </div>
+
+    <div class="form-group">
+      <label>Kategori</label>
+      <input type="text" id="book-category" placeholder="Contoh: Sastra, Sains, Sejarah…">
+    </div>
+
+    <div class="form-group">
+      <label>Deskripsi Singkat</label>
+      <input type="text" id="book-desc" placeholder="Cerita singkat tentang buku ini…">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-add')">
+        Batal
+      </button>
+
+      <button class="btn-save" onclick="addBook()">
+        ✦ Simpan Buku
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     MODAL: PROFILE
+═══════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-profile" onclick="closeModalOutside(event, 'modal-profile')">
+
+  <div class="modal">
+
+    <h3>👤 Edit Profil</h3>
+
+    <p class="modal-sub">
+      Perbarui informasi dan foto profil kamu.
+    </p>
+
+    <div class="profile-avatar-wrap">
+
+      <div class="profile-avatar-big" id="profile-avatar-big">
+        <img id="profile-avatar-img-modal" src="" alt="">
+        <span id="profile-avatar-initial-modal">U</span>
+      </div>
+
+      <div class="avatar-edit-btn" title="Ubah Foto">
+        📷
+        <input type="file" accept="image/*" onchange="updateProfilePhoto(this)">
+      </div>
+
+    </div>
+
+    <p style="text-align:center;font-size:12px;color:var(--brown-light);margin-bottom:24px;">
+      Klik ikon kamera untuk mengubah foto profil
+    </p>
+
+    <div class="form-group">
+      <label>Nama Lengkap</label>
+      <input type="text" id="profile-name-input" placeholder="Nama kamu">
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="profile-email-input" placeholder="Email kamu" disabled style="opacity:0.5">
+    </div>
+
+    <div class="modal-actions">
+
+      <button class="btn-cancel" onclick="closeModal('modal-profile')">
+        Batal
+      </button>
+
+      <button class="btn-save" onclick="saveProfile()">
+        Simpan Perubahan
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span id="toast-icon">✓</span>
+  <span id="toast-msg">Berhasil!</span>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
